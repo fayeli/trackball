@@ -88,8 +88,8 @@ public:
 		//
 		//
 		
-		glm::mat4 replaceMe = glm::perspective(1.0f, 1.0f, 1.0f, 3.0f);
-		this->P = replaceMe;
+		glm::mat4 P = glm::perspective(60.0f, 1.0f, 0.1f, 100.0f);
+		this->P = P;
         glViewport(0, 0, newWidth, newHeight);
 	}
 
