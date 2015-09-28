@@ -27,8 +27,7 @@ private:
 		// TODO Put your code for an incremental rotation here.
 		//
 		//
-		
-
+        
 	}
 
 public:
@@ -43,7 +42,6 @@ public:
 		//
 		// TODO figure out how to get the cube to the origin
 		//
-		
         translateToOrigin = glm::translate(glm::mat4(1.0f), -model.getCentroid());
         currentModelTransform = translateToOrigin;
 	}

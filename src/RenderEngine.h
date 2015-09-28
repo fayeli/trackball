@@ -98,8 +98,13 @@ private:
 	GLuint shaderProg;
 	GLuint vertexArray;
 	
+    // perspective.
 	glm::mat4 P;
+    
+    // camera.
 	glm::mat4 C;
+    
+    // model.
 	glm::mat4 M;
 
 	
