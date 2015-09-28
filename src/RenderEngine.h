@@ -88,7 +88,7 @@ public:
 		//
 		//
 		
-		glm::mat4 P = glm::perspective(60.0f, 1.0f, 0.1f, 100.0f);
+		glm::mat4 P = glm::perspective(1.04719755f, (float)newWidth/newHeight, 0.1f, 100.0f);
 		this->P = P;
         glViewport(0, 0, newWidth, newHeight);
 	}

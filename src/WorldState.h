@@ -28,6 +28,8 @@ private:
 		//
 		//
         
+        currentModelTransform = translateFromInput * rotationSpinStep * glm::inverse(translateFromInput) * currentModelTransform;
+        
 	}
 
 public:
@@ -103,8 +105,9 @@ public:
 		// TODO Put your code for a rotation of phi about axis here.
 		//
 		//
-        rotationFromInput = glm::rotate(glm::mat4(1.0f), phi, axis);
-        currentModelTransform = currentModelTransform * rotationFromInput;
+        rotationFromInput = glm::rotate(glm::mat4(1.0f), ROT_SENSITIVITY * phi, axis);
+        rotationSpinStep = rotationFromInput;
+        currentModelTransform = translateFromInput * rotationFromInput * glm::inverse(translateFromInput) * currentModelTransform;
 	}
 	
 	void updateXYTranslate(glm::ivec2 & oldPos, glm::ivec2 & newPos)
@@ -116,9 +119,10 @@ public:
 		// TODO Put your code for a translation in the x,y direction here.
 		//
 		//
-        glm::vec3 moveXY = glm::vec3(newPos.x-oldPos.x, newPos.y-oldPos.y, 0);
-        translateFromInput = glm::translate(glm::mat4(1.0f), moveXY);
-        //currentModelTransform = translateFromInput;
+        glm::vec3 moveXY = glm::vec3(XY_SENSITIVITY * (newPos.x-oldPos.x), -XY_SENSITIVITY * (newPos.y-oldPos.y), 0);
+        glm::mat4 newTranslation = glm::translate(glm::mat4(1.0f), moveXY);
+        translateFromInput = newTranslation * translateFromInput;
+        currentModelTransform = newTranslation * currentModelTransform;
 
 	}
 	
@@ -131,10 +135,11 @@ public:
 		// TODO Put your code for a translation in the z direction here.
 		//
 		//
-        //float z = trackball.project_to_sphere(Z_SENSITIVITY, newPos.x, newPos.y);
-        glm::vec3 moveZ = glm::vec3(0, 0, 1.0f);
-        translateFromInput = glm::translate(glm::mat4(1.0f), moveZ);
-        //currentModelTransform = translateFromInput;
+        
+        glm::vec3 moveZ = glm::vec3(0, 0, Z_SENSITIVITY * (newPos.y - oldPos.y));
+        glm::mat4 newTranslation = glm::translate(glm::mat4(1.0f), moveZ);
+        translateFromInput = newTranslation * translateFromInput;
+        currentModelTransform = newTranslation * currentModelTransform;
 	}
 	
 	void setSize(unsigned int x, unsigned int y)
