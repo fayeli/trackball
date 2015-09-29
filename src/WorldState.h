@@ -120,7 +120,7 @@ public:
 		//
         glm::vec3 moveXY = glm::vec3(newPos.x-oldPos.x, newPos.y-oldPos.y, 0);
         translateFromInput = glm::translate(glm::mat4(1.0f), moveXY);
-        //currentModelTransform = translateFromInput;
+        currentModelTransform = currentModelTransform * translateFromInput;
 
 	}
 	
@@ -136,7 +136,7 @@ public:
         //float z = trackball.project_to_sphere(Z_SENSITIVITY, newPos.x, newPos.y);
         glm::vec3 moveZ = glm::vec3(0, 0, 1.0f);
         translateFromInput = glm::translate(glm::mat4(1.0f), moveZ);
-        //currentModelTransform = translateFromInput;
+        currentModelTransform = currentModelTransform * translateFromInput;
 	}
 	
 	void setSize(unsigned int x, unsigned int y)
